@@ -1,0 +1,32 @@
+Starting Klippy...
+Args: ['/home/pi/klipper/klippy/klippy.py', '/home/pi/printer_data/config/printer.cfg', '-l', '/home/pi/printer_data/logs/klippy.log', '-I', '/home/pi/printer_data/comms/klippy.serial', '-a', '/home/pi/printer_data/comms/klippy.sock']
+Git version: 'v0.11.0-50-gf57ff2c0'
+CPU: 4 core ?
+Python: '3.9.2 (default, Feb 28 2021, 17:03:44) \n[GCC 10.2.1 20210110]'
+Building C code module c_helper.so
+Start printer at Wed Sep 21 23:07:22 2022 (1663816042.7 54.7)
+Unable to open config file /home/pi/printer_data/config/printer.cfg
+Traceback (most recent call last):
+  File "/home/pi/klipper/klippy/configfile.py", line 154, in _read_config_file
+    f = open(filename, 'r')
+FileNotFoundError: [Errno 2] No such file or directory: '/home/pi/printer_data/config/printer.cfg'
+Config error
+Traceback (most recent call last):
+  File "/home/pi/klipper/klippy/configfile.py", line 154, in _read_config_file
+    f = open(filename, 'r')
+FileNotFoundError: [Errno 2] No such file or directory: '/home/pi/printer_data/config/printer.cfg'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pi/klipper/klippy/klippy.py", line 175, in _connect
+    self._read_config()
+  File "/home/pi/klipper/klippy/klippy.py", line 134, in _read_config
+    config = pconfig.read_main_config()
+  File "/home/pi/klipper/klippy/configfile.py", line 275, in read_main_config
+    data = self._read_config_file(filename)
+  File "/home/pi/klipper/klippy/configfile.py", line 160, in _read_config_file
+    raise error(msg)
+configparser.Error: Unable to open config file /home/pi/printer_data/config/printer.cfg
+webhooks client 548569891360: New connection
+webhooks client 548569891360: Client info {'program': 'Moonraker', 'version': 'v0.7.1-791-ge3bcfb5'}

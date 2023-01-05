@@ -1,0 +1,204 @@
+--------------------Moonraker Log Start--------------------
+data_path: /home/pi/printer_data
+is_default_data_path: False
+config_file: /home/pi/printer_data/config/moonraker.conf
+startup_warnings: []
+verbose: False
+debug: False
+asyncio_debug: False
+is_backup_config: False
+log_file: /home/pi/printer_data/logs/moonraker.log
+software_version: v0.7.1-791-ge3bcfb5
+python_version: 3.9.2 (default, Feb 28 2021, 17:03:44)  [GCC 10.2.1 20210110]
+
+#################### Moonraker Configuration ####################
+
+[server]
+host = 0.0.0.0
+port = 7125
+max_upload_size = 1024
+klippy_uds_address = ~/printer_data/comms/klippy.sock
+
+[file_manager]
+enable_object_processing = False
+
+[authorization]
+cors_domains = 
+	https://my.mainsail.xyz
+	http://my.mainsail.xyz
+	http://*.local
+	http://*.lan
+trusted_clients = 
+	10.0.0.0/8
+	127.0.0.0/8
+	169.254.0.0/16
+	172.16.0.0/12
+	192.168.0.0/16
+	FE80::/10
+	::1/128
+
+[octoprint_compat]
+
+[history]
+
+[announcements]
+subscriptions = 
+	mainsail
+
+[update_manager]
+refresh_interval = 168
+enable_auto_refresh = True
+
+[update_manager mainsail]
+type = web
+channel = stable
+repo = mainsail-crew/mainsail
+path = ~/mainsail
+
+[update_manager mainsail-config]
+type = git_repo
+primary_branch = master
+path = ~/mainsail-config
+origin = https://github.com/mainsail-crew/mainsail-config.git
+managed_services = klipper
+
+[update_manager timelapse]
+type = git_repo
+primary_branch = main
+path = ~/moonraker-timelapse
+origin = https://github.com/mainsail-crew/moonraker-timelapse.git
+managed_services = klipper moonraker
+
+[timelapse]
+output_path = ~/timelapse/
+ffmpeg_binary_path = /usr/bin/ffmpeg
+
+[update_manager crowsnest]
+type = git_repo
+path = ~/crowsnest
+origin = https://github.com/mainsail-crew/crowsnest.git
+managed_services = crowsnest
+install_script = tools/install.sh
+
+[update_manager sonar]
+type = git_repo
+path = ~/sonar
+origin = https://github.com/mainsail-crew/sonar.git
+primary_branch = main
+managed_services = sonar
+install_script = tools/install.sh
+
+#################################################################
+All Configuration Files:
+/home/pi/printer_data/config/moonraker.conf
+#################################################################
+Unsafe Shutdown Count: 7
+
+System Info:
+
+***python***
+  version: sys.version_info(major=3, minor=9, micro=2, releaselevel='final', serial=0)
+  version_string: 3.9.2 (default, Feb 28 2021, 17:03:44)  [GCC 10.2.1 20210110]
+
+***cpu_info***
+  cpu_count: 4
+  bits: 64bit
+  processor: aarch64
+  cpu_desc: 
+  serial_number: 10000000194def68
+  hardware_desc: BCM2835
+  model: Raspberry Pi 4 Model B Rev 1.1
+  total_memory: 751464
+  memory_units: kB
+
+***sd_info***
+  manufacturer_id: 03
+  manufacturer: Sandisk
+  oem_id: 5344
+  product_name: SD32G
+  product_revision: 8.5
+  serial_number: 59a0c377
+  manufacturer_date: 1/2022
+  capacity: 29.7 GiB
+  total_bytes: 31914983424
+
+***distribution***
+  name: Debian GNU/Linux 11 (bullseye)
+  id: debian
+  version: 11
+  version_parts: {'major': '11', 'minor': '', 'build_number': ''}
+  like: 
+  codename: bullseye
+  release_info: {'name': 'MainsailOS', 'version_id': '1.0.1', 'codename': 'bullseye', 'id': 'mainsailos'}
+
+***virtualization***
+  virt_type: none
+  virt_identifier: none
+
+***network***
+
+***canbus***
+
+Systemd unit moonraker.service:
+unit_name: moonraker.service
+is_default: True
+Properties:
+**Requires=['-.mount', 'network-online.target', 'system.slice', 'sysinit.target']
+**After=['network-online.target', 'system.slice', 'basic.target', 'systemd-journald.socket', 'sysinit.target', 'klipper.service', '-.mount']
+**SupplementaryGroups=['moonraker-admin']
+**EnvironmentFiles=/home/pi/printer_data/systemd/moonraker.env
+**ExecStart=/home/pi/moonraker-env/bin/python $MOONRAKER_ARGS
+**WorkingDirectory=/home/pi/moonraker
+**FragmentPath=/etc/systemd/system/moonraker.service
+**Description=API Server for Klipper SV1
+**User=pi
+
+Systemd unit klipper.service:
+unit_name: klipper.service
+is_default: True
+Properties:
+**Description=Klipper 3D Printer Firmware SV1
+**ExecStart=/home/pi/klippy-env/bin/python $KLIPPER_ARGS
+**FragmentPath=/etc/systemd/system/klipper.service
+Klipper Version: v0.11.0-52-g40d8c2ef
+2023-01-05 00:00:50,789 [websockets.py:write_to_socket()] - Websocket closed while writing: 548213049280
+2023-01-05 00:00:55,738 [websockets.py:on_close()] - Websocket Closed: ID: 548213049280 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.98
+2023-01-05 00:34:07,450 [app.py:log_request()] - 101 GET /websocket (192.168.68.105) [_TRUSTED_USER_] 6.39ms
+2023-01-05 00:34:07,451 [websockets.py:open()] - Websocket Opened: ID: 548213049712, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15, Host Name: mainsail.local
+2023-01-05 00:34:07,469 [websockets.py:_handle_identify()] - Websocket 548213049712 Client Identified - Name: mainsail, Version: 2.4.1, Type: web
+2023-01-05 00:35:28,139 [websockets.py:write_to_socket()] - Websocket closed while writing: 548213049712
+2023-01-05 00:35:32,455 [websockets.py:on_close()] - Websocket Closed: ID: 548213049712 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.99
+2023-01-05 00:50:26,406 [app.py:log_request()] - 101 GET /websocket (192.168.68.105) [_TRUSTED_USER_] 4.60ms
+2023-01-05 00:50:26,406 [websockets.py:open()] - Websocket Opened: ID: 548213047552, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15, Host Name: mainsail.local
+2023-01-05 00:50:26,426 [websockets.py:_handle_identify()] - Websocket 548213047552 Client Identified - Name: mainsail, Version: 2.4.1, Type: web
+2023-01-05 00:51:37,276 [websockets.py:write_to_socket()] - Websocket closed while writing: 548213047552
+2023-01-05 00:51:41,410 [websockets.py:on_close()] - Websocket Closed: ID: 548213047552 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.99
+2023-01-05 01:08:51,671 [app.py:log_request()] - 101 GET /websocket (192.168.68.105) [_TRUSTED_USER_] 4.89ms
+2023-01-05 01:08:51,672 [websockets.py:open()] - Websocket Opened: ID: 548213048032, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15, Host Name: mainsail.local
+2023-01-05 01:08:51,695 [websockets.py:_handle_identify()] - Websocket 548213048032 Client Identified - Name: mainsail, Version: 2.4.1, Type: web
+2023-01-05 01:09:22,585 [websockets.py:write_to_socket()] - Websocket closed while writing: 548213048032
+2023-01-05 01:09:26,676 [websockets.py:on_close()] - Websocket Closed: ID: 548213048032 Close Code: None, Close Reason: None, Pong Time Elapsed: 35.01
+2023-01-05 01:31:36,141 [app.py:log_request()] - 101 GET /websocket (192.168.68.105) [_TRUSTED_USER_] 4.90ms
+2023-01-05 01:31:36,142 [websockets.py:open()] - Websocket Opened: ID: 548213050864, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15, Host Name: mainsail.local
+2023-01-05 01:31:36,164 [websockets.py:_handle_identify()] - Websocket 548213050864 Client Identified - Name: mainsail, Version: 2.4.1, Type: web
+2023-01-05 01:32:46,284 [websockets.py:write_to_socket()] - Websocket closed while writing: 548213050864
+2023-01-05 01:32:51,146 [websockets.py:on_close()] - Websocket Closed: ID: 548213050864 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.99
+2023-01-05 02:05:15,989 [app.py:log_request()] - 101 GET /websocket (192.168.68.105) [_TRUSTED_USER_] 6.56ms
+2023-01-05 02:05:15,990 [websockets.py:open()] - Websocket Opened: ID: 548213048848, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15, Host Name: mainsail.local
+2023-01-05 02:05:16,013 [websockets.py:_handle_identify()] - Websocket 548213048848 Client Identified - Name: mainsail, Version: 2.4.1, Type: web
+2023-01-05 02:05:30,529 [websockets.py:on_close()] - Websocket Closed: ID: 548213048848 Close Code: None, Close Reason: None, Pong Time Elapsed: 4.32
+2023-01-05 02:12:22,895 [app.py:log_request()] - 101 GET /websocket (192.168.68.105) [_TRUSTED_USER_] 2.80ms
+2023-01-05 02:12:22,896 [websockets.py:open()] - Websocket Opened: ID: 548212934016, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15, Host Name: mainsail.local
+2023-01-05 02:12:22,909 [websockets.py:_handle_identify()] - Websocket 548212934016 Client Identified - Name: mainsail, Version: 2.4.1, Type: web
+2023-01-05 02:13:10,825 [app.py:log_request()] - 101 GET /websocket (192.168.68.105) [_TRUSTED_USER_] 6.11ms
+2023-01-05 02:13:10,826 [websockets.py:open()] - Websocket Opened: ID: 548216256976, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15, Host Name: mainsail.local
+2023-01-05 02:13:10,836 [websockets.py:_handle_identify()] - Websocket 548216256976 Client Identified - Name: mainsail, Version: 2.4.1, Type: web
+2023-01-05 02:13:12,277 [websockets.py:on_close()] - Websocket Closed: ID: 548216256976 Close Code: 1001, Close Reason: None, Pong Time Elapsed: 1.46
+2023-01-05 02:48:29,226 [app.py:log_request()] - 101 GET /websocket (192.168.68.105) [_TRUSTED_USER_] 6.48ms
+2023-01-05 02:48:29,227 [websockets.py:open()] - Websocket Opened: ID: 548216202720, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15, Host Name: mainsail.local
+2023-01-05 02:48:29,235 [websockets.py:_handle_identify()] - Websocket 548216202720 Client Identified - Name: mainsail, Version: 2.4.1, Type: web
+2023-01-05 02:48:36,729 [app.py:log_request()] - 101 GET /websocket (192.168.68.105) [_TRUSTED_USER_] 2.93ms
+2023-01-05 02:48:36,730 [websockets.py:open()] - Websocket Opened: ID: 548212978160, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15, Host Name: mainsail.local
+2023-01-05 02:48:36,744 [websockets.py:_handle_identify()] - Websocket 548212978160 Client Identified - Name: mainsail, Version: 2.4.1, Type: web
+2023-01-05 02:48:39,708 [websockets.py:on_close()] - Websocket Closed: ID: 548212978160 Close Code: 1001, Close Reason: None, Pong Time Elapsed: 2.98
+2023-01-05 02:48:39,826 [websockets.py:on_close()] - Websocket Closed: ID: 548216202720 Close Code: 1001, Close Reason: WebSocket is closed due to suspension., Pong Time Elapsed: 0.59
